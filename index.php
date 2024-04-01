@@ -9,11 +9,11 @@
 </head>
 <body>
     <header>
+        <img src="images/website-logo.svg" id="logo"> 
         <h1>The Fresh Friendly Grocer</h1>
         <div class="header-bottom">
-            <img src="images/website-logo.svg" id="logo">
             <div class="search-bar">
-                <input type="text" placeholder="Search for products...">
+                <input type="text" placeholder="Search for products..." >
             </div>
         </div>
     </header>
