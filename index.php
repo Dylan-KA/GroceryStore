@@ -19,8 +19,9 @@
     </header>
 
     <section id="hero">
-        <!-- <img src="icons/shopping_cart.svg" class="cart-icon"> -->
-        <input type="image" src="icons/shopping_cart.svg" class="cart-button"/>
+        <form action="checkout.php">
+            <input type="image" src="icons/shopping_cart.svg" class="cart-button"/>
+        </form>
         <h2>Get Fresh Groceries Delivered to Your Doorstep</h2>
         <p>Order from a wide range of fresh fruits, vegetables, dairy products, meats, and more.</p>
     </section>
