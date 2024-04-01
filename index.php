@@ -11,7 +11,7 @@
     <header>
         <h1>The Fresh Friendly Grocer</h1>
         <div class="header-bottom">
-            <img src="/images/website-logo.svg" id="logo">
+            <img src="images/website-logo.svg" id="logo">
             <div class="search-bar">
                 <input type="text" placeholder="Search for products...">
             </div>
@@ -22,7 +22,6 @@
         <img src="icons/shopping_cart.svg" class="cart-icon">
         <h2>Get Fresh Groceries Delivered to Your Doorstep</h2>
         <p>Order from a wide range of fresh fruits, vegetables, dairy products, meats, and more.</p>
-        <a href="#" class="cta-button">Shop Now</a>
 
     </section>
 
