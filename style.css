@@ -134,11 +134,19 @@ nav ul li a:hover {
     padding: 10px;
 }
 
-.cart-icon {
+.cart-button {
     position: absolute;
     top: 0px;
     right: 0px;
-    height: 150px
+    height: 140px;
+    margin: 10px;
+    background-color: #ffffff ;
+    border-radius: 10px;
+    transition: 0.3s ease;
+}
+
+.cart-button:hover {
+    background: #45a049;
 }
 
 #featured-products {
