@@ -22,7 +22,6 @@
         <img src="icons/shopping_cart.svg" class="cart-icon">
         <h2>Get Fresh Groceries Delivered to Your Doorstep</h2>
         <p>Order from a wide range of fresh fruits, vegetables, dairy products, meats, and more.</p>
-
     </section>
 
     <section id="featured-products">
@@ -68,11 +67,9 @@
                 mysqli_close($conn);
             ?>
         </div>
-
     </section>
-
     <footer>
-        <p id="footer-text">&copy; 2024 Fresh Friendly Grocer - Dylan Archer. All rights reserved.</p>
+        <p id="footer-text">&copy; 2024 The Fresh Friendly Grocer - Dylan Archer. All rights reserved.</p>
     </footer>
 </body>
 </html>

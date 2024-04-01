@@ -13,6 +13,9 @@ body {
     color: #333;
     margin: 0;
     padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 p {
@@ -155,9 +158,9 @@ nav ul li a:hover {
 }
 
 .productText {
-    text-align: left;
+    text-align: center;
     margin: 5px 0;
-    color: blue;
+    color: rgb(0, 0, 0);
 }
 
 .product button {
@@ -177,17 +180,16 @@ nav ul li a:hover {
 }
 
 #footer-text {
-    color: #fff;
+    color: #ffffff;
 }
 
 footer {
     background: #333;
-    color: #fff;
+    color: #ffffff;
     text-align: center;
     padding: 20px 0;
-    position: fixed;
-    bottom: 0;
     width: 100%;
+    margin-top: auto;
 }
 
 @media (max-width: 768px) {
