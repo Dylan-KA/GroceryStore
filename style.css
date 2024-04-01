@@ -154,9 +154,10 @@ nav ul li a:hover {
     margin: 10px 0;
 }
 
-.product p {
-    text-align: center;
+.productText {
+    text-align: left;
     margin: 5px 0;
+    color: blue;
 }
 
 .product button {
