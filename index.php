@@ -27,7 +27,7 @@
     </section>
 
     <section id="featured-products">
-        <h2>Products</h2>
+        <h2>Frozen Food</h2>
 
         <div>
             <?php
@@ -36,7 +36,7 @@
                 if (!$conn)
                     die("Could not connect to Server");
                 
-                $query_string = "select product_name, image_address, unit_price, unit_quantity from products";
+                $query_string = "SELECT product_name, image_address, unit_price, unit_quantity FROM products WHERE category='Frozen Food' ";
 
                 $result = mysqli_query($conn, $query_string);
                 $num_rows = mysqli_num_rows($result);
@@ -74,6 +74,203 @@
             ?>
         </div>
     </section>
+    
+    <section id="featured-products">
+        <h2>Fresh Goods</h2>
+
+        <div>
+            <?php
+                $conn = mysqli_connect("localhost","root","","assignment1");
+                //$link = mysqli_connect("aa4xf37s2fw51e.cs0uliqvpua0.us-east-1.rds.amazonaws.com","uts","internet","uts");
+                if (!$conn)
+                    die("Could not connect to Server");
+                
+                $query_string = "SELECT product_name, image_address, unit_price, unit_quantity FROM products WHERE category='Fresh Goods' ";
+
+                $result = mysqli_query($conn, $query_string);
+                $num_rows = mysqli_num_rows($result);
+                if ($num_rows > 0) {
+                    while ($a_row = mysqli_fetch_row($result)) {
+                        print "<div class='product'>\n";
+                        print "<br>";
+                        $index = 0;
+                        foreach ($a_row as $field)
+                        {
+                            if ($index==0) 
+                            {
+                                print "<h3 class='productText'>$field</h3>\n";
+                            } else if ($index==1)
+                            {
+                                print "<div class='product-container'>";
+                                print "<img src='$field' class='product'>";
+                                print "</div>";
+                            } else if ($index==2)
+                            {
+                                print "<p class='productText'>$$field</p>\n";
+                            } else if ($index==3) {
+                                print "<p class='productText'>$field</p>\n";
+                            }
+                                
+                            $index++; 
+                        }
+                        print "<button>Add to Cart</button>";
+                        print "<br>";
+                        print "</div>";
+                    }
+                }
+
+                mysqli_close($conn);
+            ?>
+        </div>
+    </section>
+
+    <section id="featured-products">
+        <h2>Drinks</h2>
+
+        <div>
+            <?php
+                $conn = mysqli_connect("localhost","root","","assignment1");
+                //$link = mysqli_connect("aa4xf37s2fw51e.cs0uliqvpua0.us-east-1.rds.amazonaws.com","uts","internet","uts");
+                if (!$conn)
+                    die("Could not connect to Server");
+                
+                $query_string = "SELECT product_name, image_address, unit_price, unit_quantity FROM products WHERE category='Drinks' ";
+
+                $result = mysqli_query($conn, $query_string);
+                $num_rows = mysqli_num_rows($result);
+                if ($num_rows > 0) {
+                    while ($a_row = mysqli_fetch_row($result)) {
+                        print "<div class='product'>\n";
+                        print "<br>";
+                        $index = 0;
+                        foreach ($a_row as $field)
+                        {
+                            if ($index==0) 
+                            {
+                                print "<h3 class='productText'>$field</h3>\n";
+                            } else if ($index==1)
+                            {
+                                print "<div class='product-container'>";
+                                print "<img src='$field' class='product'>";
+                                print "</div>";
+                            } else if ($index==2)
+                            {
+                                print "<p class='productText'>$$field</p>\n";
+                            } else if ($index==3) {
+                                print "<p class='productText'>$field</p>\n";
+                            }
+                                
+                            $index++; 
+                        }
+                        print "<button>Add to Cart</button>";
+                        print "<br>";
+                        print "</div>";
+                    }
+                }
+
+                mysqli_close($conn);
+            ?>
+        </div>
+    </section>
+    
+    <section id="featured-products">
+        <h2>Pet Food</h2>
+
+        <div>
+            <?php
+                $conn = mysqli_connect("localhost","root","","assignment1");
+                //$link = mysqli_connect("aa4xf37s2fw51e.cs0uliqvpua0.us-east-1.rds.amazonaws.com","uts","internet","uts");
+                if (!$conn)
+                    die("Could not connect to Server");
+                
+                $query_string = "SELECT product_name, image_address, unit_price, unit_quantity FROM products WHERE category='Pet Food' ";
+
+                $result = mysqli_query($conn, $query_string);
+                $num_rows = mysqli_num_rows($result);
+                if ($num_rows > 0) {
+                    while ($a_row = mysqli_fetch_row($result)) {
+                        print "<div class='product'>\n";
+                        print "<br>";
+                        $index = 0;
+                        foreach ($a_row as $field)
+                        {
+                            if ($index==0) 
+                            {
+                                print "<h3 class='productText'>$field</h3>\n";
+                            } else if ($index==1)
+                            {
+                                print "<div class='product-container'>";
+                                print "<img src='$field' class='product'>";
+                                print "</div>";
+                            } else if ($index==2)
+                            {
+                                print "<p class='productText'>$$field</p>\n";
+                            } else if ($index==3) {
+                                print "<p class='productText'>$field</p>\n";
+                            }
+                                
+                            $index++; 
+                        }
+                        print "<button>Add to Cart</button>";
+                        print "<br>";
+                        print "</div>";
+                    }
+                }
+
+                mysqli_close($conn);
+            ?>
+        </div>
+    </section>
+
+    <section id="featured-products">
+        <h2>Other</h2>
+
+        <div>
+            <?php
+                $conn = mysqli_connect("localhost","root","","assignment1");
+                //$link = mysqli_connect("aa4xf37s2fw51e.cs0uliqvpua0.us-east-1.rds.amazonaws.com","uts","internet","uts");
+                if (!$conn)
+                    die("Could not connect to Server");
+                
+                $query_string = "SELECT product_name, image_address, unit_price, unit_quantity FROM products WHERE category='Other' ";
+
+                $result = mysqli_query($conn, $query_string);
+                $num_rows = mysqli_num_rows($result);
+                if ($num_rows > 0) {
+                    while ($a_row = mysqli_fetch_row($result)) {
+                        print "<div class='product'>\n";
+                        print "<br>";
+                        $index = 0;
+                        foreach ($a_row as $field)
+                        {
+                            if ($index==0) 
+                            {
+                                print "<h3 class='productText'>$field</h3>\n";
+                            } else if ($index==1)
+                            {
+                                print "<div class='product-container'>";
+                                print "<img src='$field' class='product'>";
+                                print "</div>";
+                            } else if ($index==2)
+                            {
+                                print "<p class='productText'>$$field</p>\n";
+                            } else if ($index==3) {
+                                print "<p class='productText'>$field</p>\n";
+                            }
+                                
+                            $index++; 
+                        }
+                        print "<button>Add to Cart</button>";
+                        print "<br>";
+                        print "</div>";
+                    }
+                }
+
+                mysqli_close($conn);
+            ?>
+        </div>
+    </section>
+
     <footer>
         <p id="footer-text">&copy; 2024 The Fresh Friendly Grocer - Dylan Archer. All rights reserved.</p>
     </footer>

@@ -26,7 +26,8 @@ p {
 h2 {
     text-align: left;
     font-weight: bold;
-    margin: 10px;
+    margin: 20px;
+    font-size: 40px;
 }
 
 input {
@@ -186,6 +187,7 @@ nav ul li a:hover {
 }
 
 .productText {
+    font-size: 18px;
     text-align: center;
     margin: 5px 0;
     color: rgb(0, 0, 0);
@@ -201,10 +203,11 @@ nav ul li a:hover {
     border-radius: 5px;
     cursor: pointer;
     transition: 0.3s ease;
+    font-size: 16px;
 }
 
 .product button:hover {
-    background: #45a049;
+    background: #92d495;
 }
 
 #footer-text {
