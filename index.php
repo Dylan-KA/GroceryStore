@@ -11,6 +11,7 @@
             var element = document.getElementById(targetId);
             if (element) {
                 element.scrollIntoView({ behavior: "smooth" });
+                console.log("scrollling to: " + targetId);
             }
         }
     </script>
@@ -30,39 +31,39 @@
         <div class="subnav">
             <button class="subnavbtn" onclick="scrollToElement('frozen_food')" >Frozen Food<i class="fa fa-caret-down"></i></button>
             <div class="subnav-content">
-            <a href="#1">Frozen Meats</a>
-            <a href="#2">Frozen Deserts</a>
+            <a href="javascript:scrollToElement('frozen_food')">Frozen Meats</a>
+            <a href="javascript:scrollToElement('frozen_food')">Frozen Deserts</a>
             </div>
         </div> 
         <div class="subnav">
             <button class="subnavbtn" onclick="scrollToElement('fresh_goods')" >Fresh Goods<i class="fa fa-caret-down"></i></button>
             <div class="subnav-content">
-            <a href="#4">Dairy</a>
-            <a href="#5">Meat</a>
-            <a href="#6">Fruit</a>
+            <a href="javascript:scrollToElement('fresh_goods')">Dairy</a>
+            <a href="javascript:scrollToElement('fresh_goods')">Meat</a>
+            <a href="javascript:scrollToElement('fresh_goods')">Fruit</a>
             </div>
         </div> 
         <div class="subnav">
             <button class="subnavbtn" onclick="scrollToElement('drinks')" >Drinks<i class="fa fa-caret-down"></i></button>
             <div class="subnav-content">
-            <a href="#7">Tea</a>
-            <a href="#8">Coffee</a>
+            <a href="javascript:scrollToElement('drinks')">Tea</a>
+            <a href="javascript:scrollToElement('drinks')">Coffee</a>
             </div>
         </div>
         <div class="subnav">
             <button class="subnavbtn" onclick="scrollToElement('pet_food')" >Pet Food<i class="fa fa-caret-down"></i></button>
             <div class="subnav-content">
-            <a href="#7">Dog</a>
-            <a href="#8">Cat</a>
-            <a href="#9">Bird</a>
-            <a href="#9">Fish</a>
+            <a href="javascript:scrollToElement('pet_food')">Dog</a>
+            <a href="javascript:scrollToElement('pet_food')">Cat</a>
+            <a href="javascript:scrollToElement('pet_food')">Bird</a>
+            <a href="javascript:scrollToElement('pet_food')">Fish</a>
             </div>
         </div>
         <div class="subnav">
             <button class="subnavbtn" onclick="scrollToElement('other')" >Other<i class="fa fa-caret-down"></i></button>
             <div class="subnav-content">
-            <a href="#7">Medicone</a>
-            <a href="#8">Other</a>
+            <a href="javascript:scrollToElement('other')">Medicine</a>
+            <a href="javascript:scrollToElement('other')">Other</a>
             </div>
         </div>
     </div>
@@ -158,7 +159,7 @@
                                 print "<p class='productText'>$$field</p>\n";
                             } else if ($index==3) {
                                 print "<p class='productText'>$field</p>\n";
-                            }
+                            } 
                                 
                             $index++; 
                         }
@@ -207,7 +208,7 @@
                                 print "<p class='productText'>$$field</p>\n";
                             } else if ($index==3) {
                                 print "<p class='productText'>$field</p>\n";
-                            }
+                            } 
                                 
                             $index++; 
                         }
@@ -256,7 +257,7 @@
                                 print "<p class='productText'>$$field</p>\n";
                             } else if ($index==3) {
                                 print "<p class='productText'>$field</p>\n";
-                            }
+                            } 
                                 
                             $index++; 
                         }
@@ -305,7 +306,7 @@
                                 print "<p class='productText'>$$field</p>\n";
                             } else if ($index==3) {
                                 print "<p class='productText'>$field</p>\n";
-                            }
+                            } 
                                 
                             $index++; 
                         }
