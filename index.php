@@ -6,6 +6,14 @@
     <title>The Fresh Friendly Grocer</title>
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
     <link rel="stylesheet" href="style.css">
+    <script>
+        function scrollToElement(targetId) {
+            var element = document.getElementById(targetId);
+            if (element) {
+                element.scrollIntoView({ behavior: "smooth" });
+            }
+        }
+    </script>
 </head>
 <body>
     <header>
@@ -18,6 +26,47 @@
         </div>
     </header>
 
+    <div class="navbar">
+        <div class="subnav">
+            <button class="subnavbtn" onclick="scrollToElement('frozen_food')" >Frozen Food<i class="fa fa-caret-down"></i></button>
+            <div class="subnav-content">
+            <a href="#1">Frozen Meats</a>
+            <a href="#2">Frozen Deserts</a>
+            </div>
+        </div> 
+        <div class="subnav">
+            <button class="subnavbtn" onclick="scrollToElement('fresh_goods')" >Fresh Goods<i class="fa fa-caret-down"></i></button>
+            <div class="subnav-content">
+            <a href="#4">Dairy</a>
+            <a href="#5">Meat</a>
+            <a href="#6">Fruit</a>
+            </div>
+        </div> 
+        <div class="subnav">
+            <button class="subnavbtn" onclick="scrollToElement('drinks')" >Drinks<i class="fa fa-caret-down"></i></button>
+            <div class="subnav-content">
+            <a href="#7">Tea</a>
+            <a href="#8">Coffee</a>
+            </div>
+        </div>
+        <div class="subnav">
+            <button class="subnavbtn" onclick="scrollToElement('pet_food')" >Pet Food<i class="fa fa-caret-down"></i></button>
+            <div class="subnav-content">
+            <a href="#7">Dog</a>
+            <a href="#8">Cat</a>
+            <a href="#9">Bird</a>
+            <a href="#9">Fish</a>
+            </div>
+        </div>
+        <div class="subnav">
+            <button class="subnavbtn" onclick="scrollToElement('other')" >Other<i class="fa fa-caret-down"></i></button>
+            <div class="subnav-content">
+            <a href="#7">Medicone</a>
+            <a href="#8">Other</a>
+            </div>
+        </div>
+    </div>
+    
     <section id="hero">
         <form action="checkout.php">
             <input type="image" src="icons/shopping_cart.svg" class="cart-button"/>
@@ -27,7 +76,7 @@
     </section>
 
     <section id="featured-products">
-        <h2>Frozen Food</h2>
+        <h2>Frozen Food<a id="frozen_food"></h2>
 
         <div>
             <?php
@@ -76,7 +125,7 @@
     </section>
     
     <section id="featured-products">
-        <h2>Fresh Goods</h2>
+        <h2>Fresh Goods<a id='fresh_goods'></h2>
 
         <div>
             <?php
@@ -125,7 +174,7 @@
     </section>
 
     <section id="featured-products">
-        <h2>Drinks</h2>
+        <h2>Drinks<a id="drinks"></h2>
 
         <div>
             <?php
@@ -174,7 +223,7 @@
     </section>
     
     <section id="featured-products">
-        <h2>Pet Food</h2>
+        <h2>Pet Food <a id="pet_food"></h2>
 
         <div>
             <?php
@@ -223,7 +272,7 @@
     </section>
 
     <section id="featured-products">
-        <h2>Other</h2>
+        <h2>Other<a id="other"></h2>
 
         <div>
             <?php
