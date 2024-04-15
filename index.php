@@ -36,7 +36,7 @@
                 if (!$conn)
                     die("Could not connect to Server");
                 
-                $query_string = "select product_name, unit_price, unit_quantity from products";
+                $query_string = "select product_name, image_address, unit_price, unit_quantity from products";
 
                 $result = mysqli_query($conn, $query_string);
                 $num_rows = mysqli_num_rows($result);
@@ -52,9 +52,13 @@
                                 print "<h3 class='productText'>$field</h3>\n";
                             } else if ($index==1)
                             {
-                                print "<p class='productText'>$$field</p>\n";
-                            } else
+                                print "<div class='product-container'>";
+                                print "<img src='$field' class='product'>";
+                                print "</div>";
+                            } else if ($index==2)
                             {
+                                print "<p class='productText'>$$field</p>\n";
+                            } else if ($index==3) {
                                 print "<p class='productText'>$field</p>\n";
                             }
                                 
