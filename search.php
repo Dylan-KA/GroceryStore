@@ -1,11 +1,11 @@
 <?php
-    function PrintProductCategory($category) : void {
+    function PrintProductSearch($searchQuery) : void {
         $conn = mysqli_connect("localhost","root","","assignment1");
         //$link = mysqli_connect("aa4xf37s2fw51e.cs0uliqvpua0.us-east-1.rds.amazonaws.com","uts","internet","uts");
         if (!$conn)
              die("Could not connect to Server");
                 
-            $query_string = "SELECT product_name, image_address, unit_price, unit_quantity, in_stock FROM products WHERE category='$category' ";
+            $query_string = "SELECT product_name, image_address, unit_price, unit_quantity, in_stock FROM products  WHERE product_name LIKE '%$searchQuery%' ";
 
             $result = mysqli_query($conn, $query_string);
             $num_rows = mysqli_num_rows($result);
@@ -40,7 +40,7 @@
                         $index++; 
                     }
                     print "<br>";
-                    print "</div>";
+                    print "</div>"; 
                 }
             }
         mysqli_close($conn);
@@ -74,7 +74,7 @@
         <h1>The Fresh Friendly Grocer</h1>
         <div class="header-bottom">
 
-            <form action="/GroceryStore/search.php" method="GET">
+            <form action="/GroceryStore/search.php">
                 <input type="text" placeholder="Search..." name="search">
             </form>
 
@@ -86,99 +86,58 @@
             <button class="subnavbtn" onclick="window.location.href='/GroceryStore/index.html';" >All Products<i class="fa fa-caret-down"></i></button>
         </div>
         <div class="subnav">
-            <button class="subnavbtn" onclick="scrollToElement('frozen_food')" >Frozen Food<i class="fa fa-caret-down"></i></button>
+            <button class="subnavbtn" onclick="window.location.href='/GroceryStore/index.html';" >Frozen Food<i class="fa fa-caret-down"></i></button>
             <div class="subnav-content">
-            <a href="javascript:scrollToElement('frozen_food')">Frozen Meats</a>
-            <a href="javascript:scrollToElement('frozen_food')">Frozen Deserts</a>
+            <a href="/GroceryStore/index.html">Frozen Meats</a>
+            <a href="/GroceryStore/index.html">Frozen Deserts</a>
             </div>
         </div> 
         <div class="subnav">
-            <button class="subnavbtn" onclick="scrollToElement('fresh_goods')" >Fresh Goods<i class="fa fa-caret-down"></i></button>
+            <button class="subnavbtn" onclick="window.location.href='/GroceryStore/index.html';" >Fresh Goods<i class="fa fa-caret-down"></i></button>
             <div class="subnav-content">
-            <a href="javascript:scrollToElement('fresh_goods')">Dairy</a>
-            <a href="javascript:scrollToElement('fresh_goods')">Meat</a>
-            <a href="javascript:scrollToElement('fresh_goods')">Fruit</a>
+            <a href="/GroceryStore/index.html">Dairy</a>
+            <a href="/GroceryStore/index.html">Meat</a>
+            <a href="/GroceryStore/index.html">Fruit</a>
             </div>
         </div> 
         <div class="subnav">
-            <button class="subnavbtn" onclick="scrollToElement('drinks')" >Drinks<i class="fa fa-caret-down"></i></button>
+            <button class="subnavbtn" onclick="window.location.href='/GroceryStore/index.html';" >Drinks<i class="fa fa-caret-down"></i></button>
             <div class="subnav-content">
-            <a href="javascript:scrollToElement('drinks')">Tea</a>
-            <a href="javascript:scrollToElement('drinks')">Coffee</a>
+            <a href="/GroceryStore/index.html">Tea</a>
+            <a href="/GroceryStore/index.html">Coffee</a>
             </div>
         </div>
         <div class="subnav">
-            <button class="subnavbtn" onclick="scrollToElement('pet_food')" >Pet Food<i class="fa fa-caret-down"></i></button>
+            <button class="subnavbtn" onclick="window.location.href='/GroceryStore/index.html';" >Pet Food<i class="fa fa-caret-down"></i></button>
             <div class="subnav-content">
-            <a href="javascript:scrollToElement('pet_food')">Dog</a>
-            <a href="javascript:scrollToElement('pet_food')">Cat</a>
-            <a href="javascript:scrollToElement('pet_food')">Bird</a>
-            <a href="javascript:scrollToElement('pet_food')">Fish</a>
+            <a href="/GroceryStore/index.html">Dog</a>
+            <a href="/GroceryStore/index.html">Cat</a>
+            <a href="/GroceryStore/index.html">Bird</a>
+            <a href="/GroceryStore/index.html">Fish</a>
             </div>
         </div>
         <div class="subnav">
-            <button class="subnavbtn" onclick="scrollToElement('other')" >Other<i class="fa fa-caret-down"></i></button>
+            <button class="subnavbtn" onclick="window.location.href='/GroceryStore/index.html';" >Other<i class="fa fa-caret-down"></i></button>
             <div class="subnav-content">
-            <a href="javascript:scrollToElement('other')">Medicine</a>
-            <a href="javascript:scrollToElement('other')">Other</a>
+            <a href="/GroceryStore/index.html">Medicine</a>
+            <a href="/GroceryStore/index.html">Other</a>
             </div>
         </div>
     </div>
-    
-    <section id="hero">
-        <form action="checkout.php">
+
+    <form action="checkout.php">
             <input type="image" src="icons/shopping_cart.svg" class="cart-button"/>
-        </form>
-        <h2>Get Fresh Groceries Delivered to Your Doorstep</h2>
-        <p>Order from a wide range of fresh fruits, vegetables, dairy products, meats, and more.</p>
-    </section>
+    </form>
 
     <section id="featured-products">
-        <h2>Frozen Food<a id="frozen_food"></h2>
+        <h2>Products that match your search</h2>
 
         <div>
             <?php
-                echo PrintProductCategory('Frozen Food');
-            ?>
-        </div>
-    </section>
-    
-    <section id="featured-products">
-        <h2>Fresh Goods<a id='fresh_goods'></h2>
-
-        <div>
-            <?php
-                echo PrintProductCategory('Fresh Goods');
-            ?>
-        </div>
-    </section>
-
-    <section id="featured-products">
-        <h2>Drinks<a id="drinks"></h2>
-
-        <div>
-            <?php
-                echo PrintProductCategory('Drinks');
-            ?>
-        </div>
-    </section>
-    
-    <section id="featured-products">
-        <h2>Pet Food <a id="pet_food"></h2>
-
-        <div>
-            <?php
-                echo PrintProductCategory('Pet Food');
-            ?>
-        </div>
-    </section>
-
-    <section id="featured-products">
-        <h2>Other<a id="other"></h2>
-
-        <div>
-            <?php
-                echo PrintProductCategory('Other');
+                if (isset($_GET['search'])) {
+                    $search_term = $_GET['search'];
+                    PrintProductSearch($search_term);
+                }
             ?>
         </div>
     </section>
