@@ -218,6 +218,32 @@ nav ul li a:hover {
     font-weight: bold;
 }
 
+.InStockText {
+    color:#039708;
+    font-weight: bold;
+}
+
+.OutStockText {
+    color:#f01a1a;
+    font-weight: bold;
+}
+
+#OutOfStockBtn {
+    display: block;
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 10px 20px;
+    background: #959595;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    font-size: 18px;
+    font-weight: bold;
+}
+
 .product button:hover {
     background: #92d495;
 }
