@@ -29,6 +29,9 @@
 
     <div class="navbar">
         <div class="subnav">
+            <button class="subnavbtn" >All Products<i class="fa fa-caret-down"></i></button>
+        </div>
+        <div class="subnav">
             <button class="subnavbtn" onclick="scrollToElement('frozen_food')" >Frozen Food<i class="fa fa-caret-down"></i></button>
             <div class="subnav-content">
             <a href="javascript:scrollToElement('frozen_food')">Frozen Meats</a>
@@ -99,7 +102,7 @@
                         {
                             if ($index==0) 
                             {
-                                print "<h3 class='productText'>$field</h3>\n";
+                                print "<h3 class='productTextBold'>$field</h3>\n";
                             } else if ($index==1)
                             {
                                 print "<div class='product-container'>";
@@ -148,7 +151,7 @@
                         {
                             if ($index==0) 
                             {
-                                print "<h3 class='productText'>$field</h3>\n";
+                                print "<h3 class='productTextBold'>$field</h3>\n";
                             } else if ($index==1)
                             {
                                 print "<div class='product-container'>";
@@ -197,7 +200,7 @@
                         {
                             if ($index==0) 
                             {
-                                print "<h3 class='productText'>$field</h3>\n";
+                                print "<h3 class='productTextBold'>$field</h3>\n";
                             } else if ($index==1)
                             {
                                 print "<div class='product-container'>";
@@ -246,7 +249,7 @@
                         {
                             if ($index==0) 
                             {
-                                print "<h3 class='productText'>$field</h3>\n";
+                                print "<h3 class='productTextBold'>$field</h3>\n";
                             } else if ($index==1)
                             {
                                 print "<div class='product-container'>";
@@ -295,7 +298,7 @@
                         {
                             if ($index==0) 
                             {
-                                print "<h3 class='productText'>$field</h3>\n";
+                                print "<h3 class='productTextBold'>$field</h3>\n";
                             } else if ($index==1)
                             {
                                 print "<div class='product-container'>";
