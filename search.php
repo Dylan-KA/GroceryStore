@@ -75,7 +75,7 @@
         <div class="header-bottom">
 
             <form action="/GroceryStore/search.php">
-                <input type="text" placeholder="Search..." name="search">
+                <input type="text" class="search-bar" placeholder="Search..." name="search">
             </form>
 
         </div>
@@ -126,7 +126,7 @@
     </div>
 
     <form action="checkout.php">
-            <input type="image" src="icons/shopping_cart.svg" class="cart-button"/>
+        <input type="image" src="icons/shopping_cart.svg" class="cart-button"/>
     </form>
 
     <section id="featured-products">

@@ -75,7 +75,7 @@
         <div class="header-bottom">
 
             <form action="/GroceryStore/search.php" method="GET">
-                <input type="text" placeholder="Search..." name="search">
+                <input type="text" class="search-bar" placeholder="Search..." name="search">
             </form>
 
         </div>
