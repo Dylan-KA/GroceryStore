@@ -353,6 +353,10 @@ footer {
 
 #deliveryDetails button:hover {
     background-color: #0056b3;
+.checkoutBox {
+    background-color: #ffffff;
+    width: 100%;
+    height: 50%;
 }
 
 @media (max-width: 768px) {

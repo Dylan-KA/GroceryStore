@@ -1,11 +1,15 @@
 <?php
+    
+    session_start();
+    print_r($_SESSION);
+
     function PrintProductCategory($category) : void {
         $conn = mysqli_connect("localhost","root","","assignment1");
         //$link = mysqli_connect("aa4xf37s2fw51e.cs0uliqvpua0.us-east-1.rds.amazonaws.com","uts","internet","uts");
         if (!$conn)
              die("Could not connect to Server");
                 
-            $query_string = "SELECT product_name, image_address, unit_price, unit_quantity, in_stock FROM products WHERE category='$category' ";
+            $query_string = "SELECT product_name, image_address, unit_price, unit_quantity, product_id, in_stock FROM products WHERE category='$category' ";
 
             $result = mysqli_query($conn, $query_string);
             $num_rows = mysqli_num_rows($result);
@@ -14,6 +18,7 @@
                     print "<div class='product'>\n";
                     print "<br>";
                     $index = 0;
+                    $itemNo = "";
                     foreach ($a_row as $field)
                     {
                         if ($index==0) 
@@ -29,10 +34,11 @@
                             print "<p class='productText'>$$field</p>\n";
                         } else if ($index==3) {
                             print "<p class='productText'>$field</p>\n";
-                        } else if ($index==4 && $field != 0) {
+                        } else if ($index==4) { $itemNo=$field; }    
+                        else if ($index==5 && $field != 0) {
                             print "<p class='productText InStockText'>In Stock</p>\n";
-                            print "<button>Add to Cart</button>";
-                        } else {
+                            print "<button onclick='addToCart(\"$itemNo\", 1)'>Add to Cart</button>";
+                        } else if ($index==5 && $field == 0) {
                             print "<p class='productText OutStockText'>Out of Stock</p>\n";
                             print "<button id='OutOfStockBtn' disabled>Add to Cart</button>";
                         }
@@ -54,7 +60,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Fresh Friendly Grocer</title>
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href=" images/favicon.ico">
     <link rel="stylesheet" href="style.css">
     <script>
         function scrollToElement(targetId) {
@@ -64,11 +70,31 @@
                 console.log("scrollling to: " + targetId);
             }
         }
+        function addToCart(itemNo, quantity) {
+            var xhr = new XMLHttpRequest();
+            var url = "AddToCart.php";
+
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            var data = "itemNo=" + encodeURIComponent(itemNo) + "&quantity=" + encodeURIComponent(quantity);
+            xhr.send(data);
+
+            // Define a callback function to handle the server response
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    // Response from the server
+                    console.log("Response Text: " + xhr.responseText);
+                }
+            };
+        }
+
+
     </script>
 </head>
 <body>
     <header>
-    <p><a href="/GroceryStore/index.html">
+    <p><a href="/GroceryStore/index.php">
         <img src="images/website-logo.svg" id="logo" > 
     </a></p>
         <h1>The Fresh Friendly Grocer</h1>
@@ -80,10 +106,10 @@
 
         </div>
     </header>
-
+    
     <div class="navbar">
         <div class="subnav">
-            <button class="subnavbtn" onclick="window.location.href='/GroceryStore/index.html';" >All Products<i class="fa fa-caret-down"></i></button>
+            <button class="subnavbtn" onclick="window.location.href='/GroceryStore/index.php';" >All Products<i class="fa fa-caret-down"></i></button>
         </div>
         <div class="subnav">
             <button class="subnavbtn" onclick="scrollToElement('frozen_food')" >Frozen Food<i class="fa fa-caret-down"></i></button>

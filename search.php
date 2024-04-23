@@ -1,11 +1,14 @@
 <?php
+
+    session_start();
+
     function PrintProductSearch($searchQuery) : void {
         $conn = mysqli_connect("localhost","root","","assignment1");
         //$link = mysqli_connect("aa4xf37s2fw51e.cs0uliqvpua0.us-east-1.rds.amazonaws.com","uts","internet","uts");
         if (!$conn)
              die("Could not connect to Server");
                 
-            $query_string = "SELECT product_name, image_address, unit_price, unit_quantity, in_stock FROM products  WHERE product_name LIKE '%$searchQuery%' ";
+            $query_string = "SELECT product_name, image_address, unit_price, unit_quantity, product_id, in_stock FROM products  WHERE product_name LIKE '%$searchQuery%' ";
 
             $result = mysqli_query($conn, $query_string);
             $num_rows = mysqli_num_rows($result);
@@ -14,6 +17,7 @@
                     print "<div class='product'>\n";
                     print "<br>";
                     $index = 0;
+                    $itemNo = "";
                     foreach ($a_row as $field)
                     {
                         if ($index==0) 
@@ -29,10 +33,11 @@
                             print "<p class='productText'>$$field</p>\n";
                         } else if ($index==3) {
                             print "<p class='productText'>$field</p>\n";
-                        } else if ($index==4 && $field != 0) {
+                        } else if ($index==4) { $itemNo=$field; }    
+                        else if ($index==5 && $field != 0) {
                             print "<p class='productText InStockText'>In Stock</p>\n";
-                            print "<button>Add to Cart</button>";
-                        } else {
+                            print "<button onclick='addToCart(\"$itemNo\", 1)'>Add to Cart</button>";
+                        } else if ($index==5 && $field == 0) {
                             print "<p class='productText OutStockText'>Out of Stock</p>\n";
                             print "<button id='OutOfStockBtn' disabled>Add to Cart</button>";
                         }
@@ -40,7 +45,7 @@
                         $index++; 
                     }
                     print "<br>";
-                    print "</div>"; 
+                    print "</div>";
                 }
             }
         mysqli_close($conn);
@@ -64,11 +69,26 @@
                 console.log("scrollling to: " + targetId);
             }
         }
+            //Adds given item to cart with given quantity, if already exists then adds to the existing quantity.
+            function addToCart(itemNo, quantity) {
+                // Check if the item is already in the session cart
+                if (sessionStorage.getItem(itemNo) === null) {
+                    // If not, add it with the specified quantity
+                    sessionStorage.setItem(itemNo, quantity);
+                    console.log("Adding " + itemNo + " for the first time");
+                } else {
+                    // If it's already in the cart, update the quantity
+                    let currentQuantity = parseInt(sessionStorage.getItem(itemNo));
+                    currentQuantity += parseInt(quantity);
+                    sessionStorage.setItem(itemNo, currentQuantity);
+                    console.log("Adding 1 more to " + itemNo);
+                }
+        }
     </script>
 </head>
 <body>
     <header>
-    <p><a href="/GroceryStore/index.html">
+    <p><a href="/GroceryStore/index.php">
         <img src="images/website-logo.svg" id="logo" > 
     </a></p>
         <h1>The Fresh Friendly Grocer</h1>
@@ -83,44 +103,44 @@
 
     <div class="navbar">
         <div class="subnav">
-            <button class="subnavbtn" onclick="window.location.href='/GroceryStore/index.html';" >All Products<i class="fa fa-caret-down"></i></button>
+            <button class="subnavbtn" onclick="window.location.href='/GroceryStore/index.php';" >All Products<i class="fa fa-caret-down"></i></button>
         </div>
         <div class="subnav">
-            <button class="subnavbtn" onclick="window.location.href='/GroceryStore/index.html';" >Frozen Food<i class="fa fa-caret-down"></i></button>
+            <button class="subnavbtn" onclick="window.location.href='/GroceryStore/index.php';" >Frozen Food<i class="fa fa-caret-down"></i></button>
             <div class="subnav-content">
-            <a href="/GroceryStore/index.html">Frozen Meats</a>
-            <a href="/GroceryStore/index.html">Frozen Deserts</a>
+            <a href="/GroceryStore/index.php">Frozen Meats</a>
+            <a href="/GroceryStore/index.php">Frozen Deserts</a>
             </div>
         </div> 
         <div class="subnav">
-            <button class="subnavbtn" onclick="window.location.href='/GroceryStore/index.html';" >Fresh Goods<i class="fa fa-caret-down"></i></button>
+            <button class="subnavbtn" onclick="window.location.href='/GroceryStore/index.php';" >Fresh Goods<i class="fa fa-caret-down"></i></button>
             <div class="subnav-content">
-            <a href="/GroceryStore/index.html">Dairy</a>
-            <a href="/GroceryStore/index.html">Meat</a>
-            <a href="/GroceryStore/index.html">Fruit</a>
+            <a href="/GroceryStore/index.php">Dairy</a>
+            <a href="/GroceryStore/index.php">Meat</a>
+            <a href="/GroceryStore/index.php">Fruit</a>
             </div>
         </div> 
         <div class="subnav">
-            <button class="subnavbtn" onclick="window.location.href='/GroceryStore/index.html';" >Drinks<i class="fa fa-caret-down"></i></button>
+            <button class="subnavbtn" onclick="window.location.href='/GroceryStore/index.php';" >Drinks<i class="fa fa-caret-down"></i></button>
             <div class="subnav-content">
-            <a href="/GroceryStore/index.html">Tea</a>
-            <a href="/GroceryStore/index.html">Coffee</a>
+            <a href="/GroceryStore/index.php">Tea</a>
+            <a href="/GroceryStore/index.php">Coffee</a>
             </div>
         </div>
         <div class="subnav">
-            <button class="subnavbtn" onclick="window.location.href='/GroceryStore/index.html';" >Pet Food<i class="fa fa-caret-down"></i></button>
+            <button class="subnavbtn" onclick="window.location.href='/GroceryStore/index.php';" >Pet Food<i class="fa fa-caret-down"></i></button>
             <div class="subnav-content">
-            <a href="/GroceryStore/index.html">Dog</a>
-            <a href="/GroceryStore/index.html">Cat</a>
-            <a href="/GroceryStore/index.html">Bird</a>
-            <a href="/GroceryStore/index.html">Fish</a>
+            <a href="/GroceryStore/index.php">Dog</a>
+            <a href="/GroceryStore/index.php">Cat</a>
+            <a href="/GroceryStore/index.php">Bird</a>
+            <a href="/GroceryStore/index.php">Fish</a>
             </div>
         </div>
         <div class="subnav">
-            <button class="subnavbtn" onclick="window.location.href='/GroceryStore/index.html';" >Other<i class="fa fa-caret-down"></i></button>
+            <button class="subnavbtn" onclick="window.location.href='/GroceryStore/index.php';" >Other<i class="fa fa-caret-down"></i></button>
             <div class="subnav-content">
-            <a href="/GroceryStore/index.html">Medicine</a>
-            <a href="/GroceryStore/index.html">Other</a>
+            <a href="/GroceryStore/index.php">Medicine</a>
+            <a href="/GroceryStore/index.php">Other</a>
             </div>
         </div>
     </div>
