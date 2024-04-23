@@ -11,14 +11,15 @@
     <link rel="stylesheet" href="style.css">
     <script>
         function runAllValidations() {
-            validateFirstName()
-            validateLastName()
-            validateStreetNumber()
-            validateStreetName()
-            validateSuburb()
-            validatePostCode()
-            validatePhoneNumber()
-            validateEmail()
+            if (!validateFirstName()) {return}
+            if (!validateLastName()) {return}
+            if (!validateStreetNumber()) {return}
+            if (!validateStreetName()) {return}
+            if (!validateSuburb()) {return}
+            if (!validatePostCode()) {return}
+            if (!validatePhoneNumber()) {return}
+            if (!validateEmail()) {return}
+            window.location = "orderConfirmation.php"
         }
         
         function validatePostCode() {
@@ -28,15 +29,17 @@
                 return true            
             } else {
                 alert("Postcode is invalid");
+                return false
             }
         }
         function validatePhoneNumber() {
             var formInput = document.getElementById("PhoneNumber").value;
-            const pattern = /^\d{10}$/;
+            const pattern = /^\+?\d[\d\s-]{8,}$/;
             if (pattern.test(formInput)) {    
                 return true            
             } else {
                 alert("Mobile number is invalid");
+                return false
             }
         }
         function validateFirstName() {
@@ -46,6 +49,7 @@
                 return true            
             } else {
                 alert("First Name is invalid");
+                return false
             }
         }
         function validateLastName() {
@@ -55,6 +59,7 @@
                 return true            
             } else {
                 alert("Last Name is invalid");
+                return false
             }
         }
         function validateStreetNumber() {
@@ -64,15 +69,17 @@
                 return true            
             } else {
                 alert("Street Number is invalid");
+                return false
             }
         }
         function validateStreetName() {
             var formInput = document.getElementById("StreetName").value;
-            const pattern = /^\s*\w+$/;
+            const pattern = /^\w+\s*\w+$/;
             if (pattern.test(formInput)) {
                 return true            
             } else {
                 alert("Street Name is invalid");
+                return false
             }
         }
         function validateSuburb() {
@@ -82,6 +89,7 @@
                 return true            
             } else {
                 alert("Suburb is invalid");
+                return false
             }
         }
         function validateEmail() {
@@ -91,6 +99,7 @@
                 return true       
             } else {
                 alert("Email is invalid");
+                return false
             }
         }
     </script>
