@@ -6,7 +6,7 @@
         $conn = mysqli_connect("localhost","root","","assignment1");
         //$link = mysqli_connect("aa4xf37s2fw51e.cs0uliqvpua0.us-east-1.rds.amazonaws.com","uts","internet","uts");
         if (!$conn)
-             die("Could not connect to Server");
+            die("Could not connect to Server");
                 
             $query_string = "SELECT product_name, image_address, unit_price, unit_quantity, product_id, in_stock FROM products  WHERE product_name LIKE '%$searchQuery%' ";
 
@@ -69,20 +69,23 @@
                 console.log("scrollling to: " + targetId);
             }
         }
-            //Adds given item to cart with given quantity, if already exists then adds to the existing quantity.
-            function addToCart(itemNo, quantity) {
-                // Check if the item is already in the session cart
-                if (sessionStorage.getItem(itemNo) === null) {
-                    // If not, add it with the specified quantity
-                    sessionStorage.setItem(itemNo, quantity);
-                    console.log("Adding " + itemNo + " for the first time");
-                } else {
-                    // If it's already in the cart, update the quantity
-                    let currentQuantity = parseInt(sessionStorage.getItem(itemNo));
-                    currentQuantity += parseInt(quantity);
-                    sessionStorage.setItem(itemNo, currentQuantity);
-                    console.log("Adding 1 more to " + itemNo);
+        function addToCart(itemNo, quantity) {
+            var xhr = new XMLHttpRequest();
+            var url = "AddToCart.php";
+
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            var data = "itemNo=" + encodeURIComponent(itemNo) + "&quantity=" + encodeURIComponent(quantity);
+            xhr.send(data);
+
+            // Define a callback function to handle the server response
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    // Response from the server
+                    console.log("Response Text: " + xhr.responseText);
                 }
+            };
         }
     </script>
 </head>
