@@ -30,6 +30,7 @@
                         } else if ($index==2)
                         {
                             print "<p class='productText'>$$field</p>\n";
+                            addToCostTotal($ID, $quantity);
                         } else if ($index==3) {
                             print "<p class='productText'>$field</p>\n";
                         } else if ($index==4) {
@@ -45,6 +46,14 @@
                 }
             }
         mysqli_close($conn);
+    }
+
+    function addToCostTotal($ID, $quantity) {
+
+    }
+
+    function removeFromCostTotal($ID) {
+        
     }
 
 ?>
@@ -68,7 +77,6 @@
             var data = "itemNo=" + encodeURIComponent($itemNo);
             xhr.send(data);
 
-            // Define a callback function to handle the server response
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     // Response from the server
@@ -81,6 +89,25 @@
             //Check if in stock, etc.
             window.location = "delivery.php"
         }
+        function clearCart() {
+            var xhr = new XMLHttpRequest();
+            var url = "ClearCart.php";
+
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            xhr.send();
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    // Response from the server
+                    console.log("Response Text: " + xhr.responseText);
+                    location.reload();
+                }
+            };
+
+        }
+
     </script>
 </head>
 <body>
@@ -106,6 +133,14 @@
         <h2>Shopping cart</h2>
     </section>
     
+    <?php
+        if(!empty($_SESSION)) {
+            echo "<section id='deliveryDetails'>";
+            echo "<button onclick='clearCart()'>Clear Cart</button>";
+            echo "</section>";
+        }
+    ?>
+
     <section id="featured-products">
         <?php
             foreach ($_SESSION as $key => $value) {
@@ -122,12 +157,10 @@
             echo "</section>";
         } else {
             echo "<section id='deliveryDetails'>";
-            echo "<button onclick='validateCart()'>Proceed to Checkout</button>";
+            echo "<button onclick='validateCart()'>Place an Order</button>";
             echo "</section>";
         }
     ?>
-
-    
 
     <footer>
         <p id="footer-text">&copy; 2024 The Fresh Friendly Grocer - Dylan Archer. All rights reserved.</p>
