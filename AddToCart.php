@@ -3,11 +3,13 @@
 
     // Function to add item to cart
     function AddToCart($itemNo, $quantity) {
-        if (!isset($_SESSION["$itemNo"])) {
-            $_SESSION["$itemNo"] = $quantity;
+        //Create session variable with item ID if doesn't exist
+        if (!isset($_SESSION["_$itemNo"])) {
+            $_SESSION["_$itemNo"] = $quantity;
         } else {
-            $newQuantity = $_SESSION["$itemNo"] + $quantity;
-            $_SESSION["$itemNo"] = $newQuantity; 
+            //Increment session variable if ID does exist
+            $newQuantity = $_SESSION["_$itemNo"] += $quantity;
+            $_SESSION["_$itemNo"] = $newQuantity; 
         }
     }
 

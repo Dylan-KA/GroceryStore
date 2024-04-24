@@ -1,13 +1,12 @@
 <?php
     
     session_start();
-    //print_r($_SESSION);
 
     function PrintProductCategory($category) : void {
         $conn = mysqli_connect("localhost","root","","assignment1");
         //$link = mysqli_connect("aa4xf37s2fw51e.cs0uliqvpua0.us-east-1.rds.amazonaws.com","uts","internet","uts");
         if (!$conn)
-             die("Could not connect to Server");
+            die("Could not connect to Server");
                 
             $query_string = "SELECT product_name, image_address, unit_price, unit_quantity, product_id, in_stock FROM products WHERE category='$category' ";
 
