@@ -7,7 +7,7 @@
         if (!$conn)
             die("Could not connect to Server");
                 
-            $query_string = "SELECT product_name, image_address, unit_price, unit_quantity FROM products WHERE product_id='$ID' ";
+            $query_string = "SELECT product_name, image_address, unit_price, unit_quantity, product_id FROM products WHERE product_id='$ID' ";
 
             $result = mysqli_query($conn, $query_string);
             $num_rows = mysqli_num_rows($result);
@@ -16,6 +16,7 @@
                     print "<div class='product'>\n";
                     print "<br>";
                     $index = 0;
+                    $itemNo = "";
                     foreach ($a_row as $field)
                     {
                         if ($index==0) 
@@ -31,12 +32,15 @@
                             print "<p class='productText'>$$field</p>\n";
                         } else if ($index==3) {
                             print "<p class='productText'>$field</p>\n";
+                        } else if ($index==4) {
+                            $itemNo = $field;
                         }
                                 
                         $index++; 
                     }
-                    print "<p class='productText'>$quantity</p>\n";
-                    print "<br>";
+                    print "<p class='productText'><b>Quantity: $quantity</b></p>\n";
+                    print "<p class='productText InStockText'>In Stock</p>\n";
+                    print "<button onclick='removeFromCart(\"$itemNo\")'>Remove from Cart</button>";
                     print "</div>";
                 }
             }
@@ -54,12 +58,24 @@
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <link rel="stylesheet" href="style.css">
     <script>
-        function scrollToElement(targetId) {
-            var element = document.getElementById(targetId);
-            if (element) {
-                element.scrollIntoView({ behavior: "smooth" });
-                console.log("scrollling to: " + targetId);
-            }
+        function removeFromCart($itemNo) {
+            var xhr = new XMLHttpRequest();
+            var url = "RemoveFromCart.php";
+
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            var data = "itemNo=" + encodeURIComponent($itemNo);
+            xhr.send(data);
+
+            // Define a callback function to handle the server response
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    // Response from the server
+                    console.log("Response Text: " + xhr.responseText);
+                }
+            };
+            location.reload();
         }
         function validateCart() {
             //Check if in stock, etc.
@@ -81,9 +97,9 @@
             <button class="subnavbtn"><i class="fa fa-caret-down"></i></button>
         </div>
     </div>
-    
+
     <form action="/GroceryStore/index.php">
-            <input type="image" src="icons/shopping_cart.svg" class="cart-button"/>
+        <input type="image" src="icons/shopping_cart.svg" class="cart-button"/>
     </form>
 
     <section id="hero">
@@ -99,9 +115,19 @@
         ?>
     </section>  
     
-    <section id="deliveryDetails">
-        <button onclick="validateCart()">Proceed to Checkout</button>
-    </section>
+    <?php
+        if(empty($_SESSION)) {
+            echo "<section id='hero'>";
+            echo "<p>Your cart is empty</p>";
+            echo "</section>";
+        } else {
+            echo "<section id='deliveryDetails'>";
+            echo "<button onclick='validateCart()'>Proceed to Checkout</button>";
+            echo "</section>";
+        }
+    ?>
+
+    
 
     <footer>
         <p id="footer-text">&copy; 2024 The Fresh Friendly Grocer - Dylan Archer. All rights reserved.</p>
