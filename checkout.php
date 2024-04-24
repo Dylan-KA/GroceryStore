@@ -1,6 +1,8 @@
 <?php
     session_start();
 
+    $totalCost = 0.00;
+
     function PrintProduct($ID, $quantity) : void {
         $conn = mysqli_connect("localhost","root","","assignment1");
         //$link = mysqli_connect("aa4xf37s2fw51e.cs0uliqvpua0.us-east-1.rds.amazonaws.com","uts","internet","uts");
@@ -30,7 +32,7 @@
                         } else if ($index==2)
                         {
                             print "<p class='productText'>$$field</p>\n";
-                            addToCostTotal($ID, $quantity);
+                            addToCostTotal($field, $quantity);
                         } else if ($index==3) {
                             print "<p class='productText'>$field</p>\n";
                         } else if ($index==4) {
@@ -48,12 +50,9 @@
         mysqli_close($conn);
     }
 
-    function addToCostTotal($ID, $quantity) {
-
-    }
-
-    function removeFromCostTotal($ID) {
-        
+    function addToCostTotal($price, $quantity) {
+        global $totalCost;
+        $totalCost += ($price * $quantity);
     }
 
 ?>
@@ -157,6 +156,8 @@
             echo "</section>";
         } else {
             echo "<section id='deliveryDetails'>";
+            $formattedTotalCost = number_format($totalCost, 2);
+            echo "<h2>Total cost is: $$formattedTotalCost</h2>";
             echo "<button onclick='validateCart()'>Place an Order</button>";
             echo "</section>";
         }
