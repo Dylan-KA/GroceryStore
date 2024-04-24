@@ -1,6 +1,6 @@
 <?php
     session_start();
-    print_r($_SESSION);
+    //print_r($_SESSION);
 ?>
 
 <!DOCTYPE html>
@@ -19,6 +19,10 @@
                 console.log("scrollling to: " + targetId);
             }
         }
+        function validateCart() {
+            //Check if in stock, etc.
+            window.location = "delivery.php"
+        }
     </script>
 </head>
 <body>
@@ -27,13 +31,7 @@
         <img src="images/website-logo.svg" id="logo" > 
     </a></p>
         <h1>The Fresh Friendly Grocer</h1>
-        <div class="header-bottom">
-
-            <form action="/GroceryStore/search.php">
-                <input type="text" placeholder="Search..." name="search">
-            </form>
-
-        </div>
+        <div class="header-bottom"></div>
     </header>
     
     <div class="navbar">
@@ -58,6 +56,10 @@
             print_r($_SESSION);
         ?>
     </section>  
+    
+    <section id="deliveryDetails">
+        <button onclick="validateCart()">Proceed to Checkout</button>
+    </section>
 
     <footer>
         <p id="footer-text">&copy; 2024 The Fresh Friendly Grocer - Dylan Archer. All rights reserved.</p>

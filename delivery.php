@@ -21,7 +21,6 @@
             if (!validateEmail()) {return}
             window.location = "orderConfirmation.php"
         }
-        
         function validatePostCode() {
             var formInput = document.getElementById("PostCode").value;
             const pattern = /^\d{4}$/;
@@ -113,33 +112,43 @@
         <div class="header-bottom"></div>
     </header>
 
+    <div class="navbar">
+        <div class="subnav">
+            <button class="subnavbtn"><i class="fa fa-caret-down"></i></button>
+        </div>
+    </div>
+
     <section id="hero">
         <h2>Delivery Details</h2>
         <p>Please enter your details to submit your order</p>
     </section>
+    
+    <section id="leftAlign">
+        <button class="backButton" onclick="window.location.href = 'checkout.php';">Return to Cart</button>
+    </section>
 
     <section id="deliveryDetails">
-    <form action="" method="GET">
-        <input type="text" placeholder="First Name" name="fName"id="FirstName" required>
-        <input type="text" placeholder="Last Name" name="lName" id="LastName" required>
-        <input type="text" placeholder="Street Number" name="streetNumber" id="StreetNumber" required>
-        <input type="text" placeholder="Street" name="street" id="StreetName" required>
-        <input type="text" placeholder="Suburb" name="suburb" id="Suburb" required>
-        <input type="text" placeholder="Postcode" name="pCode" id="PostCode" required>
-        <select name="State" value="STATE" selected="selected" id="State" required>
-            <option value="" disabled selected>State</option>    
-            <option value="NSW">NSW</option>
-            <option value="VIC">VIC</option>
-            <option value="QLD">QLD</option>
-            <option value="WA">WA</option>
-            <option value="SA">SA</option>
-            <option value="TAS">TAS</option>
-            <option value="ACT">ACT</option>
-            <option value="NT">NT</option>
-        <input type="text" placeholder="Mobile Number" name="mNumber" id ="PhoneNumber" required>
-        <input type="text" placeholder="Email Address" name="email" id="Email" required>
-    </form>
-    <button onclick="runAllValidations()">Submit Order</button>
+        <form action="" method="GET">
+            <input type="text" placeholder="First Name" name="fName"id="FirstName" required>
+            <input type="text" placeholder="Last Name" name="lName" id="LastName" required>
+            <input type="text" placeholder="Street Number" name="streetNumber" id="StreetNumber" required>
+            <input type="text" placeholder="Street" name="street" id="StreetName" required>
+            <input type="text" placeholder="Suburb" name="suburb" id="Suburb" required>
+            <input type="text" placeholder="Postcode" name="pCode" id="PostCode" required>
+            <select name="State" value="STATE" selected="selected" id="State" required>
+                <option value="" disabled selected>State</option>    
+                <option value="NSW">NSW</option>
+                <option value="VIC">VIC</option>
+                <option value="QLD">QLD</option>
+                <option value="WA">WA</option>
+                <option value="SA">SA</option>
+                <option value="TAS">TAS</option>
+                <option value="ACT">ACT</option>
+                <option value="NT">NT</option>
+            <input type="text" placeholder="Mobile Number" name="mNumber" id ="PhoneNumber" required>
+            <input type="text" placeholder="Email Address" name="email" id="Email" required>
+        </form>
+        <button onclick="runAllValidations()">Submit Order</button>
     </section>
 
     <footer>

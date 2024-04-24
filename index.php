@@ -1,7 +1,7 @@
 <?php
     
     session_start();
-    print_r($_SESSION);
+    //print_r($_SESSION);
 
     function PrintProductCategory($category) : void {
         $conn = mysqli_connect("localhost","root","","assignment1");
