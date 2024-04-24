@@ -135,8 +135,8 @@
     
     <?php
         if(!empty($_SESSION)) {
-            echo "<section id='deliveryDetails'>";
-            echo "<button onclick='clearCart()'>Clear Cart</button>";
+            echo "<section id='leftAlign'>";
+            echo "<button class='backButton' onclick='clearCart()'>Clear Cart</button>";
             echo "</section>";
         }
     ?>

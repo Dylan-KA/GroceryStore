@@ -66,7 +66,6 @@
             var element = document.getElementById(targetId);
             if (element) {
                 element.scrollIntoView({ behavior: "smooth" });
-                console.log("scrollling to: " + targetId);
             }
         }
         function addToCart(itemNo, quantity) {
