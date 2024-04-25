@@ -1,5 +1,41 @@
 <?php
+    
     session_start();
+
+    $totalCost = 0.00;
+
+    function PrintProduct($ID, $quantity) : void {
+        $conn = mysqli_connect("localhost","root","","assignment1");
+        //$link = mysqli_connect("aa4xf37s2fw51e.cs0uliqvpua0.us-east-1.rds.amazonaws.com","uts","internet","uts");
+        if (!$conn)
+            die("Could not connect to Server");
+            $query_string = "SELECT product_name, unit_price FROM products WHERE product_id='$ID' ";
+
+            $result = mysqli_query($conn, $query_string);
+            $num_rows = mysqli_num_rows($result);
+            if ($num_rows > 0) {
+                while ($a_row = mysqli_fetch_row($result)) {
+                    $index = 0;
+                    foreach ($a_row as $field)
+                    {
+                        if ($index==0) {
+                            print "<p>$field, ";
+                        } else if ($index==1) {
+                            addToCostTotal($field, $quantity);
+                            print "$$field each. Quantity: ($quantity)</p>";
+                        }
+                        $index++;
+                    }
+                }
+            }
+        mysqli_close($conn);
+    }
+
+    function addToCostTotal($price, $quantity) {
+        global $totalCost;
+        $totalCost += ($price * $quantity);
+    }
+    
 ?>
 
 <!DOCTYPE html>
@@ -10,12 +46,30 @@
     <title>The Fresh Friendly Grocer</title>
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <link rel="stylesheet" href="style.css">
+    <script>
+        function clearCart() {
+            var xhr = new XMLHttpRequest();
+            var url = "ClearCart.php";
+
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            xhr.send();
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    // Response from the server
+                    console.log("Response Text: " + xhr.responseText);
+                    location.href="/GroceryStore/index.html"
+                }
+            };
+
+        }
+    </script>
 </head>
 <body>
     <header>
-    <p><a href="/GroceryStore/index.html">
-        <img src="images/website-logo.svg" id="logo" > 
-    </a></p>
+        <img src="images/website-logo.svg" id="logo" onclick="clearCart()">
         <h1>The Fresh Friendly Grocer</h1>
         <div class="header-bottom"></div>
     </header>
@@ -29,25 +83,27 @@
     <section id="featured-products">
         <div>
             <h3>Order Details</h3>
-            <p>Apples</p>
-            <p><b>Total</b></p>
-            <p>$100.00</p>
+            <?php
+                foreach ($_SESSION as $key => $value) {
+                    $stripped_key = substr($key, 1);
+                    PrintProduct($stripped_key, $value);
+                }
+            ?>
+            <p><b>Total Cost:</b></p>
+            <?php
+                $formattedTotalCost = number_format($totalCost, 2);
+                echo "<p>$$formattedTotalCost</p>";
+            ?>
         </div>
     </section>
 
-    <section id="featured-products">
-        <div>
-            <h3>Customer Details</h3>
-            <p>First name</p>
-            <p>Last name</p>
-            <p>Street Name</p>
-            <p>Postcode</p>
-            <p>City/Suburb</p>
-            <p>Email</p>
-            <p>Mobile Number</p>
-        </div>
-    </section>
-    <br>
+    <?php
+        if(!empty($_SESSION)) {
+            echo "<section id='leftAlign'>";
+            echo "<button class='backButton' onclick='clearCart()'>Return to Home page</button>";
+            echo "</section>";
+        }
+    ?>
 
     <footer>
         <p id="footer-text">&copy; 2024 The Fresh Friendly Grocer - Dylan Archer. All rights reserved.</p>

@@ -2,7 +2,7 @@
     session_start();
 
     $totalCost = 0.00;
-        $allInStock = true;
+    $allInStock = true;
 
     function PrintProduct($ID, $quantity) : void {
         $conn = mysqli_connect("localhost","root","","assignment1");
