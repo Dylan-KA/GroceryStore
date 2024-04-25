@@ -4,6 +4,7 @@
 
     $totalCost = 0.00;
 
+    function removeStockFromDB() {
     $conn = mysqli_connect("localhost", "root", "", "assignment1");
     if (!$conn)
         die("Could not connect to Server");
@@ -16,6 +17,9 @@
         }
 
     mysqli_close($conn);
+    }
+    
+    removeStockFromDB();
 
     function PrintProduct($ID, $quantity) : void {
         $conn = mysqli_connect("localhost","root","","assignment1");
