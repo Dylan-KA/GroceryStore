@@ -4,6 +4,19 @@
 
     $totalCost = 0.00;
 
+    $conn = mysqli_connect("localhost", "root", "", "assignment1");
+    if (!$conn)
+        die("Could not connect to Server");
+
+        foreach ($_SESSION as $key => $quantity) {
+            // Update the in_stock column for the specified product ID and quantity
+            $stripped_key = substr($key, 1);
+            $query = "UPDATE products SET in_stock = in_stock - $quantity WHERE product_id = '$stripped_key'";
+            mysqli_query($conn, $query);
+        }
+
+    mysqli_close($conn);
+
     function PrintProduct($ID, $quantity) : void {
         $conn = mysqli_connect("localhost","root","","assignment1");
         //$link = mysqli_connect("aa4xf37s2fw51e.cs0uliqvpua0.us-east-1.rds.amazonaws.com","uts","internet","uts");
