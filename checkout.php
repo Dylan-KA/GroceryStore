@@ -2,6 +2,7 @@
     session_start();
 
     $totalCost = 0.00;
+        $allInStock = true;
 
     function PrintProduct($ID, $quantity) : void {
         $conn = mysqli_connect("localhost","root","","assignment1");
@@ -9,7 +10,7 @@
         if (!$conn)
             die("Could not connect to Server");
                 
-            $query_string = "SELECT product_name, image_address, unit_price, unit_quantity, product_id FROM products WHERE product_id='$ID' ";
+            $query_string = "SELECT product_name, image_address, unit_price, unit_quantity, product_id, in_stock FROM products WHERE product_id='$ID' ";
 
             $result = mysqli_query($conn, $query_string);
             $num_rows = mysqli_num_rows($result);
@@ -33,16 +34,22 @@
                         {
                             print "<p class='productText'>$$field</p>\n";
                             addToCostTotal($field, $quantity);
+                            print "<p class='productText'><b>Quantity: $quantity</b></p>\n";
                         } else if ($index==3) {
                             print "<p class='productText'>$field</p>\n";
                         } else if ($index==4) {
                             $itemNo = $field;
-                        }
-                                
+                        } else if ($index==5) {
+                            if ($field < $quantity) {
+                                print "<p class='productText OutStockText'>Out of Stock</p>\n";
+                                global $allInStock;
+                                $allInStock = false;
+                            } else {
+                                print "<p class='productText InStockText'>In Stock</p>\n";
+                            }
+                        }     
                         $index++; 
                     }
-                    print "<p class='productText'><b>Quantity: $quantity</b></p>\n";
-                    print "<p class='productText InStockText'>In Stock</p>\n";
                     print "<button onclick='removeFromCart(\"$itemNo\")'>Remove from Cart</button>";
                     print "</div>";
                 }
@@ -158,7 +165,11 @@
             echo "<section id='deliveryDetails'>";
             $formattedTotalCost = number_format($totalCost, 2);
             echo "<h2>Total cost is: $$formattedTotalCost</h2>";
-            echo "<button onclick='validateCart()'>Place an Order</button>";
+            if ($allInStock) {
+                echo "<button onclick='validateCart()'>Place an Order</button>";
+            } else {
+                echo "<button>An item is out of Stock</button>";
+            }
             echo "</section>";
         }
     ?>
