@@ -19,7 +19,14 @@
             if (!validatePostCode()) {return}
             if (!validatePhoneNumber()) {return}
             if (!validateEmail()) {return}
-            window.location = "orderConfirmation.php"
+            console.log("Passsed all field validations.");
+            
+            checkStock().then(function() {
+                console.log("Everything is in stock, going to order confirmation page.");
+                window.location = "orderConfirmation.php";
+            }).catch(function(error) {
+                console.error("Failed to check stock:", error);
+            });
         }
         function validatePostCode() {
             var formInput = document.getElementById("PostCode").value;
@@ -100,6 +107,39 @@
                 alert("Email is invalid");
                 return false
             }
+        }
+        function checkStock() {
+            var xhr = new XMLHttpRequest();
+            var url = "CheckStock.php";
+
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            var data = "empty";
+            xhr.send(data);
+
+            // Define a promise to handle the asynchronous response
+            return new Promise(function(resolve, reject) {
+                // Define a callback function to handle the server response
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState == 4) {
+                        if (xhr.status == 200) {
+                            // Response from the server
+                            console.log("Response Text: " + xhr.responseText);
+                            if (xhr.responseText == "true") {
+                                console.log("All items are in stock.");
+                                resolve(true);
+                            } else {
+                                console.log("Some items are out of stock.");
+                                reject("Some items are out of stock.");
+                            }
+                        } else {
+                            console.log("Error:", xhr.status);
+                            reject("Error occurred while checking stock.");
+                        }
+                    }
+                };
+            });
         }
     </script>
 </head>

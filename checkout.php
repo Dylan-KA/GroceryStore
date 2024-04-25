@@ -92,7 +92,6 @@
             location.reload();
         }
         function validateCart() {
-            //Check if in stock, etc.
             window.location = "delivery.php"
         }
         function clearCart() {
