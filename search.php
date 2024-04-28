@@ -3,8 +3,7 @@
     session_start();
 
     function PrintProductSearch($searchQuery) : void {
-        $conn = mysqli_connect("localhost","root","","assignment1");
-        //$link = mysqli_connect("aa4xf37s2fw51e.cs0uliqvpua0.us-east-1.rds.amazonaws.com","uts","internet","uts");
+        $conn = mysqli_connect("awseb-e-8ihdzvvsqk-stack-awsebrdsdatabase-ckzu1vcamcll.cliy8o44kafs.us-east-1.rds.amazonaws.com","dylan","dylan123","assignment1");
         if (!$conn)
             die("Could not connect to Server");
                 

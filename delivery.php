@@ -105,7 +105,7 @@
 </head>
 <body>
     <header>
-    <p><a href="/GroceryStore/index.html">
+    <p><a href="/GroceryStore/index.php">
         <img src="images/website-logo.svg" id="logo" > 
     </a></p>
         <h1>The Fresh Friendly Grocer</h1>
