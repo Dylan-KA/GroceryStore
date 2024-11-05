@@ -5,7 +5,7 @@
     $allInStock = true;
 
     function PrintProduct($ID, $quantity) : void {
-        $conn = mysqli_connect("awseb-e-8ihdzvvsqk-stack-awsebrdsdatabase-ckzu1vcamcll.cliy8o44kafs.us-east-1.rds.amazonaws.com","dylan","dylan123","assignment1");
+        $conn = mysqli_connect("localhost","root","","assignment1");
         if (!$conn)
             die("Could not connect to Server");
                 
